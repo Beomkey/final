@@ -8,6 +8,8 @@ import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 })
 export class HomePage {
   members: Array<any> = [];
+  searchRes: Array<any> = [];
+  searchQuery: string = "";
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
     this.members = [
@@ -16,6 +18,7 @@ export class HomePage {
     {name:'Sister', phone_number: '010-1234-0002', address: '경북 포항시 북구 흥해읍 한동로 558 한동대학교 창조관'}, 
     {name:'Brother', phone_number: '010-1234-0003', address: '경북 포항시 북구 흥해읍 한동로 558 한동대학교 비전관'} 
   ];
+  this.searchRes = this.members;  
   }
 
   addMember() {
@@ -55,5 +58,22 @@ export class HomePage {
     let index = this.members.indexOf(member);
     if (index > -1) 
       this.members.splice(index, 1);
+  }
+  initializeItems() {
+    this.searchRes = this.members;
+  }
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    this.initializeItems();
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.searchRes = this.searchRes.filter((item: any) => {
+        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
   }
 }

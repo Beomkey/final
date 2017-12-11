@@ -5,6 +5,11 @@
     </button>
     <ion-title>Edit Members</ion-title>
   </ion-navbar>
+
+  <ion-toolbar>
+      <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  </ion-toolbar>
+  
 </ion-header>
 
 <ion-content>
@@ -12,7 +17,7 @@
     <ion-icon name="add">ADD MEMBER</ion-icon>
   </button>
   <ion-list>
-    <ion-item *ngFor="let member of members">
+    <ion-item *ngFor="let member of searchRes">
       <ion-icon name="trash" on-click="delete(member)"></ion-icon>
       {{member.name}} / {{member.phone_number}}
     </ion-item>
