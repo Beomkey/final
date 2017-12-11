@@ -13,6 +13,7 @@
   </button>
   <ion-list>
     <ion-item *ngFor="let member of members">
+      <ion-icon name="trash" on-click="delete(member)"></ion-icon>
       {{member.name}} / {{member.phone_number}}
     </ion-item>
   </ion-list>

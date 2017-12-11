@@ -51,4 +51,9 @@ export class HomePage {
     })
     alert.present();
   }
+  delete(member: any) {
+    let index = this.members.indexOf(member);
+    if (index > -1) 
+      this.members.splice(index, 1);
+  }
 }
