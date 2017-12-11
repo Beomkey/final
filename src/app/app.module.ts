@@ -9,6 +9,18 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyCsq7ZJKUu4QvKY9zUTdVI2TK5PXwyxiZs",
+  authDomain: "ionic2do-3e5c1.firebaseapp.com",
+  databaseURL: "https://ionic2do-3e5c1.firebaseio.com",
+  projectId: "ionic2do-3e5c1",
+  storageBucket: "ionic2do-3e5c1.appspot.com",
+  messagingSenderId: "52330945566"
+};
+
 @NgModule({
   declarations: [
     MyApp,
@@ -18,6 +30,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
