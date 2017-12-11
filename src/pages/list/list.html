@@ -8,16 +8,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+  <ion-slides pager>
+    <ion-slide *ngFor="let friend of friends">
+      {{friend.name}}<br>
+      {{friend.phone_number}} <br>
+      {{friend.address}}          
+    </ion-slide>
+  </ion-slides>
 </ion-content>
