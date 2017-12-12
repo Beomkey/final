@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { HonorCodePage } from '../pages/honor-code/honor-code';
 
 import { MemberServiceProvider } from '../providers/member-service/member-service';
 
@@ -37,7 +38,8 @@ export class MyApp {
     this.memberService.members$.subscribe((mems: Array<any>) => {
       this.pages = [
         { title: 'Edit Members', component: HomePage, icon: 'create' },
-        { title: 'Friends', component: ListPage, icon: 'people' }
+        { title: 'Friends', component: ListPage, icon: 'people' },
+        { title: 'Honor Code', component: HonorCodePage, icon: 'heart'}
       ];
       for (let newMem of mems) {
         this.pages.push({ title: newMem.name, component: HomePage, icon: 'people' });
