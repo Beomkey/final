@@ -1,23 +1,21 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
+import { MemberServiceProvider } from '../../providers/member-service/member-service';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  members: Array<any> = [];
+  public members: Array<any> = [];
   searchRes: Array<any> = [];
   searchQuery: string = "";
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
-    this.members = [
-    {name:'Father', phone_number: '010-1234-0000', address: '경북 포항시 북구 흥해읍 한동로 558 한동대학교 벧엘관'}, 
-    {name:'Mother', phone_number: '010-1234-0001', address: '경북 포항시 북구 흥해읍 한동로 558 한동대학교 은혜관'}, 
-    {name:'Sister', phone_number: '010-1234-0002', address: '경북 포항시 북구 흥해읍 한동로 558 한동대학교 창조관'}, 
-    {name:'Brother', phone_number: '010-1234-0003', address: '경북 포항시 북구 흥해읍 한동로 558 한동대학교 비전관'} 
-  ];
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController,
+  public memberService: MemberServiceProvider) {
+    memberService.members$.subscribe((members: Array<any>) => {
+      this.members = members;
+    });
   this.searchRes = this.members;  
   }
 
@@ -47,7 +45,7 @@ export class HomePage {
         {
           text: 'ADD',
           handler: data => {
-            this.members.push({name: data.name, phone_number: data.phone_number, address: data.address});
+            this.memberService.addMember({name: data.name, phone_number: data.phone_number, address: data.address});
           }
         }
       ]
@@ -55,9 +53,7 @@ export class HomePage {
     alert.present();
   }
   delete(member: any) {
-    let index = this.members.indexOf(member);
-    if (index > -1) 
-      this.members.splice(index, 1);
+    this.memberService.removeMember(member);
   }
   initializeItems() {
     this.searchRes = this.members;

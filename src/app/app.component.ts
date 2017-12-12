@@ -24,7 +24,6 @@ export class MyApp {
       { title: 'Edit Members', component: HomePage, icon: 'create' },
       { title: 'Friends', component: ListPage, icon: 'people' }
     ];
-
   }
 
   initializeApp() {
